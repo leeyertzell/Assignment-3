@@ -2,42 +2,36 @@ public class Customer
 {
 	private String firstName = "", lastName = "" , streetAddress = "" , city = "" , state = "" , phone = "" , emailAddress = "";
 	private int zip = 0;
-	
-	//SETTERS
-	public void setName(String name)
+	//CONSTRUCTOR
+	public Customer()
 	{
-		String[] nameArry = new String[2];
-		nameArry = name.split(" ");
-		if(nameArry.length == 0)
-		{
-			this.firstName = "(BLANK)";
-			this.lastName  = "(BLANK)";
-		}
-		else if(nameArry.length == 1)
-		{
-			this.firstName = name;
-			this.lastName  = "(BLANK)";
-		}
-		else
-		{
-			this.firstName = nameArry[0];
-			this.lastName  = nameArry[1];
-		}
+	}
+	public Customer(String firstName , String lastName)
+	{
+		this.firstName = firstName.trim();
+		this.lastName = lastName.trim();
+	}
+	//SETTERS
+	public void setName(String firstName , String lastName)
+	{
+		this.firstName = firstName.trim();
+		this.lastName = lastName.trim();
 	}
 	public void setAddress(String streetAddress , String city , String state , String zip)
 	{
-		this.streetAddress = streetAddress;
-		this.city          = city;
-		this.state         = state;
-		this.zip           = Integer.valueOf(zip);
+		
+		this.streetAddress = streetAddress.trim();
+		this.city          = city.trim();
+		this.state         = state.trim();
+		this.zip           = Integer.valueOf(zip.trim());
 	}
 	public void setPhone(String phone)
 	{
-		this.phone = phone;
+		this.phone = phone.trim();
 	}
 	public void setEmailAddress(String emailAddress)
 	{
-		this.emailAddress = emailAddress;
+		this.emailAddress = emailAddress.trim();
 	}
 	//GETTERS
 	public String getName()

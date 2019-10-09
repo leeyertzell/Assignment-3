@@ -29,15 +29,6 @@ public class Main
 		System.out.println("+--------------------------------------------------+");
 		System.out.print("Selection: ");
 		String n = input.nextLine();
-		//Invalid input error notice.
-		while (!((n == "1") || (n == "2") || (n == "3") || (n == "4") || (n == "5") || (n == "6") || (n == "7")))
-		{
-			System.out.println("+--------------------------------------------------+");
-			System.out.println("| Invalid value, please select from the menu.      |");
-			System.out.println("+--------------------------------------------------+");
-			System.out.print("Selection: ");
-			n = input.nextLine();
-		}
 		//valid input options
 		switch (n) 
 		{
@@ -63,6 +54,9 @@ public class Main
 				Quit();
 				break;
 			default:
+				System.out.println("+--------------------------------------------------+");
+				System.out.println("| Invalid value, please select from the menu.      |");
+				System.out.println("+--------------------------------------------------+");
 			}
 			MenuLoop(custArry);	
 		input.close();
@@ -71,6 +65,7 @@ public class Main
 	//Menu Switch Methods
 	public static Customer[] AddCustomer(Customer[] custArry)
 	{
+		//Method immediately lengthens current Array by 1.
 		custArry = ExtendArry(custArry);
 		custArry[custArry.length - 1] = new Customer();
 		Scanner addCust = new Scanner(System.in);
@@ -78,16 +73,17 @@ public class Main
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Add Customer'. Please enter the    |");
 		System.out.println("| following information about the customer.  You   |");
-		System.out.println("| may leave a field blank if necessary.            |");
+		System.out.println("| may leave a field blank if necessary. Please end |");
+		System.out.println("| all fields with a comma (,).                     |");
 		System.out.println("+--------------------------------------------------+");
-		System.out.print(" 1) Name (First Last): ");
-			custArry[custArry.length - 1].setName(addCust.nextLine());
-	//	System.out.print(" 3) Address (Street, City, State, Zip): ");
-	//		custArry[custArry.length - 1].setAddress(addCust.next() , addCust.next() , addCust.next() , addCust.next());
-		System.out.print(" 7) Phone Number: ");
-			custArry[custArry.length - 1].setPhone(addCust.nextLine());
-		System.out.print(" 8) Email Address: ");
-			custArry[custArry.length - 1].setEmailAddress(addCust.nextLine());
+		System.out.print(" 1) Name (First, Last, ): ");
+			custArry[custArry.length - 1].setName(addCust.next() , addCust.next());
+		System.out.print(" 3) Address (Street, City, State, Zip, ): ");
+			custArry[custArry.length - 1].setAddress(addCust.next() , addCust.next() , addCust.next() , addCust.next());
+		System.out.print(" 7) Phone Number (###-###-####, ): ");
+			custArry[custArry.length - 1].setPhone(addCust.next());
+		System.out.print(" 8) Email Address (example@you.who, ): ");
+			custArry[custArry.length - 1].setEmailAddress(addCust.next());
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| The new customer has been added to the list. Now |");
 		System.out.println("| returning to the main menu.                      |");
