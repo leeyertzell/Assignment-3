@@ -76,13 +76,13 @@ public class Main
 		System.out.println("| may leave a field blank if necessary. Please end |");
 		System.out.println("| all fields with a comma (,).                     |");
 		System.out.println("+--------------------------------------------------+");
-		System.out.print(" 1) Name (First, Last, ): ");
+		System.out.print(" 1) Name (First, Last,): ");
 			custArry[custArry.length - 1].setName(addCust.next() , addCust.next());
-		System.out.print(" 3) Address (Street, City, State, Zip, ): ");
+		System.out.print(" 3) Address (Street, City, State, Zip,): ");
 			custArry[custArry.length - 1].setAddress(addCust.next() , addCust.next() , addCust.next() , addCust.next());
-		System.out.print(" 7) Phone Number (###-###-####, ): ");
+		System.out.print(" 7) Phone Number (###-###-####,): ");
 			custArry[custArry.length - 1].setPhone(addCust.next());
-		System.out.print(" 8) Email Address (example@you.who, ): ");
+		System.out.print(" 8) Email Address (example@you.who,): ");
 			custArry[custArry.length - 1].setEmailAddress(addCust.next());
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| The new customer has been added to the list. Now |");
@@ -90,7 +90,7 @@ public class Main
 		System.out.println("+--------------------------------------------------+");
 		return custArry;
 	}
-	public static Customer[] DeleteCustomer(Customer[] custArry)
+/**/public static Customer[] DeleteCustomer(Customer[] custArry)
 	{
 		Scanner delCust = new Scanner(System.in);
 		System.out.println("+--------------------------------------------------+");
@@ -146,7 +146,7 @@ public class Main
 		}
 		return;
 	}
-	public static void CustomerSearch(Customer[] custArry)
+/**/public static void CustomerSearch(Customer[] custArry)
 	{
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Find Customer'. Please enter the   |");
@@ -239,7 +239,7 @@ public class Main
 
 		return;
 	}
-	public static void LoadCustomerList(Customer[] custArry) throws FileNotFoundException
+/**/public static void LoadCustomerList(Customer[] custArry) throws FileNotFoundException
 	{
 		//Scanner filePathInput = new Scanner(System.in);
 		//String filePath = null;
@@ -303,7 +303,7 @@ public class Main
 		System.exit(0);
 	}
 	//Array Management Methods
-	public static Customer[] CustomerSorter(Customer[] custArry)
+	public static Customer[] CustomerSorter(Customer[] custArry)//I implemented my own sorter which runs after every menu item. 
 	{
 		Customer[] sortedArry = new Customer[custArry.length];
 		for (int i = 0 ; i < custArry.length ; i++) 
@@ -324,7 +324,7 @@ public class Main
 		}
 		return sortedArry;
 	}
- 	public static Customer[] ExtendArry(Customer[] custArry) //I still used your code from the announcement to extend the array. 
+ 	public static Customer[] ExtendArry(Customer[] custArry)//I still used your code from the announcement to extend the array. 
  	{
 		Customer[] biggerCustArry = new Customer[custArry.length + 1]; 
 		for (int i = 0 ; i < custArry.length ; i++)
@@ -333,7 +333,7 @@ public class Main
 		}
 		return biggerCustArry;
 	}
-	public static Customer[] ShrinkArry(Customer[] custArry)//I modified your extender code for deletions
+	public static Customer[] ShrinkArry(Customer[] custArry)//I modified your extender code for deletions. 
 	{
 		Customer[] smallerCustArry = new Customer[custArry.length - 1];
 		for (int i = 0  ; i < custArry.length - 1 ; i++)
