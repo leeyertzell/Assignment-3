@@ -2,7 +2,7 @@ import java.io.File; // import File class
 import java.io.FileNotFoundException; // file input stream is at runtime
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Scanner;
 @SuppressWarnings("resource") //System.in cannot be reopened once closed, silly compiler.
 
 public class Main
@@ -14,8 +14,7 @@ public class Main
 		MenuLoop(custArry);
 	}
 	public static void MenuLoop(Customer[] custArry) throws FileNotFoundException
-	{
-		//Since Menu is looped until exit, sorting occurs automatically at the top of the menu method every time it is called. 
+	{ 
 		CustomerSorter(custArry);
 		Scanner input = new Scanner(System.in);
 		//Menu prints in a compact fashion, with integers corresponding to methods.
@@ -69,21 +68,26 @@ public class Main
 		custArry = ExtendArry(custArry);
 		custArry[custArry.length - 1] = new Customer();
 		Scanner addCust = new Scanner(System.in);
-		addCust.useDelimiter(",");
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Add Customer'. Please enter the    |");
 		System.out.println("| following information about the customer.  You   |");
 		System.out.println("| may leave a field blank if necessary. Please end |");
 		System.out.println("| all fields with a comma (,).                     |");
 		System.out.println("+--------------------------------------------------+");
-		System.out.print(" 1) Name (First, Last,): ");
-			custArry[custArry.length - 1].setName(addCust.next() , addCust.next());
-		System.out.print(" 3) Address (Street, City, State, Zip,): ");
-			custArry[custArry.length - 1].setAddress(addCust.next() , addCust.next() , addCust.next() , addCust.next());
-		System.out.print(" 7) Phone Number (###-###-####,): ");
-			custArry[custArry.length - 1].setPhone(addCust.next());
-		System.out.print(" 8) Email Address (example@you.who,): ");
-			custArry[custArry.length - 1].setEmailAddress(addCust.next());
+		System.out.print("Name (First Last): ");
+			custArry[custArry.length - 1].setName(addCust.nextLine());
+		System.out.print("Street Address: ");
+			custArry[custArry.length - 1].setStreetAddress(addCust.nextLine());
+		System.out.print("City: ");
+			custArry[custArry.length - 1].setCity(addCust.nextLine());
+		System.out.print("State: ");
+			custArry[custArry.length - 1].setState(addCust.nextLine());
+		System.out.print("Zip Code: ");
+			custArry[custArry.length - 1].setZip(addCust.nextLine());
+		System.out.print("Phone Number (###-###-####): ");
+			custArry[custArry.length - 1].setPhone(addCust.nextLine());
+		System.out.print("Email Address: ");
+			custArry[custArry.length - 1].setEmailAddress(addCust.nextLine());
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| The new customer has been added to the list. Now |");
 		System.out.println("| returning to the main menu.                      |");
