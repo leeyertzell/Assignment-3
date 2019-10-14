@@ -2,21 +2,38 @@ public class Customer implements Comparable<Customer>
 {
 	private String firstName = "", lastName = "" , streetAddress = "" , city = "" , state = "" , phone = "" , emailAddress = "";
 	private int zip = 0;
-	//CONSTRUCTOR
+	//CONSTRUCTORS
 	public Customer()
 	{
-	
 	}
 	public Customer(String firstAndLastName)
 	{
 		String[] names = firstAndLastName.split(" ");
-		this.firstName = names[0];
-		this.lastName = names[1];	
+		this.firstName = names[0].trim();
+		this.lastName = names[1].trim();	
 	}
 	public Customer(String firstName , String lastName)
 	{
 		this.firstName = firstName.trim();
 		this.lastName = lastName.trim();
+	}
+	public Customer(String firstName , String lastName , String streetAddress , String city , String state , String zip , String phone , String emailAddress)
+	{
+		this.firstName = firstName.trim();
+		this.lastName = lastName.trim();
+		this.streetAddress = streetAddress.trim();
+		this.city = city.trim();
+		this.state = state.trim();
+		try 
+		{
+			this.zip = Integer.valueOf(zip.trim());
+		}
+		catch (NumberFormatException nfe)
+		{
+			//Initialization value of 0 is used.
+		}
+		this.phone = phone.trim();
+		this.emailAddress = emailAddress.trim();
 	}
 	//SETTERS
 	public void setName(String firstName , String lastName)
@@ -128,32 +145,14 @@ public class Customer implements Comparable<Customer>
 		return emailAddress;
 	}
 	//METHODS
-
+	@Override
+	public String toString()
+	{
+		return this.getName();
+	}
+	@Override
 	public int compareTo(Customer c)
 	{
-		//Checks equivalence by full name.  Returns 1 or -1 depending on which is first alphabetically, ignoring case.  
-		//If both names match, checks other parameters.  If all match, return 0.  Else, return -1.
-		int i = this.getName().compareToIgnoreCase(c.getName());
-		if(i == 0)
-			if(this.equals(c))
-			{
-				return 0;
-			}
-		return -1;
-	}
-	public boolean equals(Customer c)
-	{
-		if(  this.lastName.equalsIgnoreCase(c.lastName)
-		  && this.firstName.equalsIgnoreCase(c.firstName)
-		  && this.city.equalsIgnoreCase(c.city)
-		  && this.state.equalsIgnoreCase(c.state)
-		  && this.emailAddress.equalsIgnoreCase(c.emailAddress))
-		{
-			return true;
-		}
-		else 
-		{
-			return false;
-		}
+		return this.getName().compareTo(c.getName());
 	}
 }
