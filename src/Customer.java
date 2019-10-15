@@ -104,33 +104,33 @@ public class Customer implements Comparable<Customer>
 	{
 		String name;
 		name = lastName + ", " + firstName;
-		return name;
+		return name.trim();
 	}
 	public String getFirstName()
 	{
-		return firstName;
+		return firstName.trim();
 	}
 	public String getLastName()
 	{
-		return lastName;
+		return lastName.trim();
 	}
 	public String getAddress()
 	{
 		String address;
-		address = streetAddress + ", " + city + ", " + state + ", " + zip;
+		address = streetAddress.trim() + ", " + city.trim() + ", " + state.trim() + ", " + zip;
 		return address;
 	}
 	public String getStreetAddress()
 	{
-		return streetAddress;
+		return streetAddress.trim();
 	}
 	public String getCity()
 	{
-		return city;
+		return city.trim();
 	}
 	public String getState()
 	{
-		return state;
+		return state.trim();
 	}
 	public int getZip()
 	{
@@ -138,11 +138,11 @@ public class Customer implements Comparable<Customer>
 	}
 	public String getPhone()
 	{
-		return phone;
+		return phone.trim();
 	}
 	public String getEmail()
 	{
-		return emailAddress;
+		return emailAddress.trim();
 	}
 	//METHODS
 	@Override

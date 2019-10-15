@@ -1,3 +1,6 @@
+	/*
+ 	|Author: n01425511
+	*/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,25 +10,31 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
-@SuppressWarnings("resource")
 public class Main
 {
-	public static void main(String[] args) throws FileNotFoundException
+	public static void main(String[] args) throws IOException
 	{
-		System.out.println("       WELCOME TO THE JAVA CUSTOMER REGISTRY.       ");
+		System.out.println("+--------------------------------------------------+");
+		System.out.println("|      WELCOME TO THE JAVA CUSTOMER REGISTRY.      |");
+		System.out.println("+--------------------------------------------------+");
 		ArrayList<Customer> custArry = new ArrayList<Customer>(0);
-		MenuLoop(custArry);
+		Scanner s = new Scanner(System.in);
+		MenuLoop(custArry , s);
+		System.out.println("+--------------------------------------------------+");
+		System.out.println("| Goodbye.                                         |");
+		System.out.println("+--------------------------------------------------+");
+		s.close();
 	}
 	/*
 	|MenuLoop 
 	|The MenuLoop method is the main menu of this project.  It maintains the ArrayList of Customers by
 	|passing it to the switch-statement methods, and also by automatically sorting it every time it is
-	|returned to.  The only valid way to exit the program is to enter '7' at the main menu.
+	|returned to.  The only valid way to exit the program is to enter '7' at the main menu to return 
+	|to main().
 	*/
-	public static void MenuLoop(ArrayList<Customer> custArry) throws FileNotFoundException
+	public static void MenuLoop(ArrayList<Customer> custArry , Scanner s) throws IOException
 	{ 
 		Collections.sort(custArry);
-		Scanner s = new Scanner(System.in);
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| Please select an option from the following menu. |");
 		System.out.println("|                                                  |");
@@ -40,47 +49,50 @@ public class Main
 		switch (n) 
 			{
 			case "1": //Add a customer.
-				AddCustomer(custArry); 
+				AddCustomer(custArry , s);
+				MenuLoop(custArry , s);
 				break;
 			case "2": //Delete a customer.
-				DeleteCustomer(custArry); 
+				DeleteCustomer(custArry , s); 
+				MenuLoop(custArry , s);
 				break;
 			case "3": //View the list of customers.
 				ViewCustomerList(custArry);
+				MenuLoop(custArry , s);
 				break;
 			case "4": //Find a customer on the list and display information fields.
-				SearchForCustomer(custArry);
+				SearchForCustomer(custArry , s);
+				MenuLoop(custArry , s);
 				break;
 			case "5": //Load Customer List from file.
-				LoadCustomerList(custArry);
+				LoadCustomerList(custArry , s);
+				MenuLoop(custArry , s);
 				break;
 			case "6": //Save Customer List to file
-				SaveCustomerList(custArry);
+				SaveCustomerList(custArry , s);
+				MenuLoop(custArry , s);
 				break;
 			case "7": //Quit. This is the only way to exit the program without crashing.
-				Quit();
-				break;
+				return;
 			default:
 				System.out.println("+--------------------------------------------------+");
 				System.out.println("| Invalid value, please select from the menu.      |");
 				System.out.println("+--------------------------------------------------+");
+				MenuLoop(custArry , s);
 			}
-			MenuLoop(custArry);	
-		s.close();
 		return;
 	}
 	/*
 	|Menu Switch Methods
-	|These methods are accessible through the main menu, and always return to the main menu. 
+	|These methods are accessible through the main menu, and 1 - 6 will return to the main menu. 
 	*/
-	public static void AddCustomer(ArrayList<Customer> custArry)
+	public static void AddCustomer(ArrayList<Customer> custArry , Scanner s)
 	{
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Add Customer'. Please enter the    |");
 		System.out.println("| following information about the customer.  You   |");
 		System.out.println("| may leave a field blank if necessary.            |");
 		System.out.println("+--------------------------------------------------+");
-		Scanner s = new Scanner(System.in);
 		Customer c = new Customer();
 		System.out.print("Name (First Last): ");
 			c.setName(s.nextLine());
@@ -104,11 +116,9 @@ public class Main
 		System.out.println("+--------------------------------------------------+");
 		return;
 	}
-	public static void DeleteCustomer(ArrayList<Customer> custArry)
+	public static void DeleteCustomer(ArrayList<Customer> custArry , Scanner s)
 	{
-
 		Customer c = new Customer();
-		Scanner s = new Scanner(System.in);
 		int a , left , right;
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Delte Customer'. Please enter the  |");
@@ -142,7 +152,7 @@ public class Main
 				System.out.println("| Do you wish to delete this cutomer? (y/n)        |");
 				System.out.println("+--------------------------------------------------+");
 				String del = s.nextLine();
-				if(del.equalsIgnoreCase("y") || del.equalsIgnoreCase("yes"))
+				if(del.trim().equalsIgnoreCase("y") || del.equalsIgnoreCase("yes"))
 				{
 					custArry.remove(a);
 					System.out.println("+--------------------------------------------------+");
@@ -219,10 +229,9 @@ public class Main
 		}
 		return;
 	}
-	public static void SearchForCustomer(ArrayList<Customer> custArry)
+	public static void SearchForCustomer(ArrayList<Customer> custArry , Scanner s)
 	{
 		Customer c = new Customer();
-		Scanner s = new Scanner(System.in);
 		int a , left , right;
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Find a Customer'. Please enter the |");
@@ -286,66 +295,79 @@ public class Main
 					System.out.println("+--------------------------------------------------+");
 				}
 			}
-		
 		}
 	}
-	public static void LoadCustomerList(ArrayList<Customer> custArry) throws FileNotFoundException
+	public static void LoadCustomerList(ArrayList<Customer> custArry , Scanner s) throws IOException
 	{
-		Scanner s1 = new Scanner(System.in);
+		//C:\Users\Anthony\Desktop\COP2220\Proj2\assignment-3-leeyertzell\assignment-3\test1.txt
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Load Customer List'. Please either |");
 		System.out.println("| type or copy & poste the location of the file    |");
 		System.out.println("| and then press the 'Enter' key.                  |");
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("File Path: ");
-		String filePath = s1.nextLine();
+		String filePath = s.nextLine();
 		File file = new File(filePath);
-		try (BufferedReader br = new BufferedReader(new FileReader(file)))
+		try 
 		{
-			String unparsed;
-			while((unparsed = br.readLine()) != null)
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			{
-			String[] parsed = unparsed.split(",");
-			Customer c = new Customer(parsed[0] , parsed[1] , 
-									  parsed[2] , parsed[3] , 
-									  parsed[4] , parsed[5] , 
-									  parsed[6] , parsed[7]);
-			custArry.add(c);
+				String unparsed;
+				while((unparsed = br.readLine()) != null)
+				{
+					String[] parsed = unparsed.split(",");
+					if(parsed.length == 8)
+					{Customer c = new Customer(parsed[0] , parsed[1] , 
+											  parsed[2] , parsed[3] , 
+											  parsed[4] , parsed[5] , 
+											  parsed[6] , parsed[7]);
+					custArry.add(c);
+					}
+				}
+				System.out.println("+--------------------------------------------------+");
+				System.out.println("| The customer list has been loaded.  Returning to |");
+				System.out.println("| main menu.                                       |");
+				System.out.println("+--------------------------------------------------+");
+
+				br.close();
 			}
 		}
-		catch (Exception e)
+		catch (IndexOutOfBoundsException e1)
 		{
-	            //Continues Reading past EOF, but doesn't crash, will polish before final submission.
+			System.out.println("File format errors detected. " + e1);
 		}
-		System.out.println("+--------------------------------------------------+");
-		System.out.println("| The customer list has been loaded.  Returning to |");
-		System.out.println("| main menu.                                       |");
-		System.out.println("+--------------------------------------------------+");
+		catch (FileNotFoundException e2)
+		{
+	         System.out.println("The file name or path is invalid. " + e2);
+		}
 	}
-	public static void SaveCustomerList(ArrayList<Customer> custArry)
+	public static void SaveCustomerList(ArrayList<Customer> custArry , Scanner s)
 	{
-		Scanner fileNameInput = new Scanner(System.in);
 		String fileName = null;
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("| You selected 'Save Customer List'. Please name   |");
 		System.out.println("| the file and press the 'Enter' key. If the file  |");
 		System.out.println("| already exists, it will be overwritten.          |");
-		System.out.println("| be overwritten.                                  |");
 		System.out.println("+--------------------------------------------------+");
 		System.out.println("File Name: ");
-		fileName = fileNameInput.nextLine();
+		fileName = s.nextLine();
 		fileName = fileName.concat(".txt");
 		//Preparing the output as a string
 		String customerList = "";
-		for(int i = 0 ; i < custArry.size() ; i++)
+		for(int i = 0 ; i < custArry.size() - 1 ; i++)
 		{
-			customerList = customerList.concat(custArry.get(i).getFirstName()
-									  + ", " + custArry.get(i).getLastName()
-					                  + ", " + custArry.get(i).getAddress()
-					                  + ", " + custArry.get(i).getPhone()
-					                  + ", " + custArry.get(i).getEmail()
+			customerList = customerList.concat(custArry.get(i).getFirstName().trim()
+									  + ", " + custArry.get(i).getLastName().trim()
+					                  + ", " + custArry.get(i).getAddress().trim()
+					                  + ", " + custArry.get(i).getPhone().trim()
+					                  + ", " + custArry.get(i).getEmail().trim()
 					                  + "\n");
 		}
+			customerList = customerList.concat(custArry.get(custArry.size() - 1).getFirstName().trim()
+									  + ", " + custArry.get(custArry.size() - 1).getLastName().trim()
+									  + ", " + custArry.get(custArry.size() - 1).getAddress().trim()
+									  + ", " + custArry.get(custArry.size() - 1).getPhone().trim()
+									  + ", " + custArry.get(custArry.size() - 1).getEmail().trim());
 		//Setting up the PrintWriter class. Surrounded with 'try' to catch the IOException for a null file name.
 		try
 		{
@@ -361,13 +383,6 @@ public class Main
 		{
 			System.out.println(" #ERROR: " + e );
 		}
-	}
-	public static void Quit()
-	{
-		System.out.println("+--------------------------------------------------+");
-		System.out.println("| Goodbye.                                         |");
-		System.out.println("+--------------------------------------------------+");
-		System.exit(0);
 	}
 	/*
 	|Search Methods.
