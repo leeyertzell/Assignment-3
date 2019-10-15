@@ -313,6 +313,7 @@ public class Main
 		{
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			{
+				br.readLine();//Skip first line since it is just field names.
 				String unparsed;
 				while((unparsed = br.readLine()) != null)
 				{
@@ -329,7 +330,6 @@ public class Main
 				System.out.println("| The customer list has been loaded.  Returning to |");
 				System.out.println("| main menu.                                       |");
 				System.out.println("+--------------------------------------------------+");
-
 				br.close();
 			}
 		}
@@ -354,7 +354,7 @@ public class Main
 		fileName = s.nextLine();
 		fileName = fileName.concat(".txt");
 		//Preparing the output as a string
-		String customerList = "";
+		String customerList = "FirstName, LastName, Street, City, State, Zip, Phone, Email\n";
 		for(int i = 0 ; i < custArry.size() - 1 ; i++)
 		{
 			customerList = customerList.concat(custArry.get(i).getFirstName().trim()
