@@ -24,6 +24,7 @@ public class Main
 		System.out.println("| Goodbye.                                         |");
 		System.out.println("+--------------------------------------------------+");
 		s.close();
+		return;
 	}
 	/*
 	|MenuLoop 
